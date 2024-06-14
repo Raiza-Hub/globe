@@ -1,0 +1,34 @@
+.git-button span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .git-button .icon {
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .git-button:hover {
+    background: #fff;
+  }
+
+  .git-button:hover .svg-wrapper {
+    transform: scale(1.25);
+    transition: 0.4s linear;
+  }
+
+  .git-button:hover .icon {
+    transform: translateX(1.4em) scale(1.1);
+    fill: #000;
+  }
+
+  .git-button:hover span {
+    opacity: 0;
+    transition: 0.4s linear;
+  }
+
+  .git-button:active {
+    transform: scale(0.95);
+  }
