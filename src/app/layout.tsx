@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import {Source_Sans_3} from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import Providers from "@/components/Providers";
+import Navbar from "@/components/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const source_san_3 = Source_Sans_3({
+  subsets: ["latin"],
+});
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +22,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={cn(
+        'min-h-screen antialiased',
+        source_san_3.className
+      )}>
+        <Providers>
+          <Navbar />
+          <div className="h-full pt-12 mx-auto">
+            {children}
+          </div>
+        </Providers>
+      </body>
     </html>
   );
 }
