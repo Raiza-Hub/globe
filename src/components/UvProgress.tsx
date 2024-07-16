@@ -18,7 +18,7 @@ const UvProgress = React.forwardRef<
     {...props}
   >
     <ProgressPrimitive.Indicator
-      className="h-3 w-3 flex-1 bg-primary rounded-full shadow-lg shadow-white ring-2 ring-white text-white"
+      className="h-3 w-3 flex-1 bg-primary rounded-full shadow-lg shadow-white ring-2 ring-white dark:ring-black text-white"
       style={{ marginLeft: `calc(${value}% - 0.8rem)` }}
     />
   </ProgressPrimitive.Root>
