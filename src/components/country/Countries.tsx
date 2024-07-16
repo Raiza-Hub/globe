@@ -30,9 +30,6 @@ const Countries = ({ country }: { country: Country }) => {
 
 
 
-
-
-
     return (
         <div className="group relative">
             <div key={country.cca2} className="w-full flex flex-col justify-center md:px-2 border rounded-sm">
@@ -62,18 +59,18 @@ const Countries = ({ country }: { country: Country }) => {
 
                     <div className="grid grid-cols-2 mx-4 gap-x-2">
                         <div className="flex flex-col border py-2 space-y-1">
-                            <p className="text-gray-900 font-medium ml-2">Population:</p>
-                            <p className="text-center text-gray-700">{country.population.toLocaleString()}</p>
+                            <p className="text-gray-900 dark:text-white font-medium ml-2">Population:</p>
+                            <p className="text-center text-gray-700 dark:text-white">{country.population.toLocaleString()}</p>
                         </div>
                         <div className="flex flex-col border py-2 space-y-1">
-                            <p className="text-gray-900 font-medium ml-2">Capital:</p>
-                            <p className="text-center text-gray-700 truncate">{country.capital?.[0] ?? 'None'}</p>
+                            <p className="text-gray-900 dark:text-white font-medium ml-2">Capital:</p>
+                            <p className="text-center text-gray-700 dark:text-white truncate">{country.capital?.[0] ?? 'None'}</p>
                         </div>
                     </div>
 
                     <div className=" flex flex-col mx-4 py-2 space-y-1 border">
-                        <p className="text-gray-900 font-medium ml-2">Currency:</p>
-                        <div className="text-center text-gray-700 truncate">
+                        <p className="text-gray-900 dark:text-white font-medium ml-2">Currency:</p>
+                        <div className="text-center text-gray-700 dark:text-white truncate">
                             {currencyElements}
                         </div>
                     </div>
