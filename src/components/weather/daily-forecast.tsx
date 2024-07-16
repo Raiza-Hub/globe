@@ -1,7 +1,19 @@
 import { Forecast } from "@/types/forecast";
 import { WeatherData } from "@/types/weather";
-import { drizzleIcon, rain, snow, clearSky, cloudy } from "../Icons";
-import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
+import { 
+    drizzleIcon, 
+    rain, 
+    snow, 
+    clearSky, 
+    cloudy, 
+    thunderStormIcon,
+    HazeIcon 
+} from "../Icons";
+import { 
+    Carousel,
+    CarouselContent, 
+    CarouselItem 
+} from "../ui/carousel";
 import moment from "moment";
 import { kelvinToCelsius } from "@/lib/misc";
 
@@ -36,17 +48,20 @@ const DailyForecast = ({ forecast, temp }: DailyForecastProps) => {
                 return clearSky;
             case 'Clouds':
                 return cloudy;
+            case 'Thunderstorm':
+                return thunderStormIcon;
+            case 'Mist':
+                return HazeIcon;
             default:
-                return clearSky;
+                return clearSky
         }
     };
-
 
     return (
         <div className='col-span-full sm-[581px]:col-span-2 pt-6 px-4 h-48 border rounded-lg flex flex-col gap-8 shadow-sm'>
             <div className="h-full flex gap-1 overflow-hidden">
                 {todaysForecast.length < 1 ? (
-                    <div className='flex justify-center'>
+                    <div className='flex items-center justify-center'>
                         <h1 className="text-2xl line-through text-rose-500">
                             No Data Available
                         </h1>
