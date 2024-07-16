@@ -3,12 +3,12 @@ import axios from "axios";
 
 
 const key = process.env.OPENWEATHER_API_KEY;
-console.log('weather', key)
+
 const BASEURL = 'https://api.openweathermap.org/data/2.5'
 
 export const getWeather = async (lat: number, lon: number) => {
     try {
-        const res = await axios.get(`${BASEURL}/weather?lat=${lat}&lon=${lon}&appid=4c2a682b3126163ba5db64902b2030f9`)
+        const res = await axios.get(`${BASEURL}/weather?lat=${lat}&lon=${lon}&appid=${key}`)
         return res.data;
     } catch (error) {
         console.error('Error fetching data:', error)
@@ -18,7 +18,7 @@ export const getWeather = async (lat: number, lon: number) => {
 
 export const getAirPollution = async (lat: number, lon: number) => {
     try {
-        const res = await axios.get(`${BASEURL}/air_pollution?lat=${lat}&lon=${lon}&appid=4c2a682b3126163ba5db64902b2030f9`)
+        const res = await axios.get(`${BASEURL}/air_pollution?lat=${lat}&lon=${lon}&appid=${key}`)
         return res.data;
     } catch (error) {
         console.error('Error fetching data:', error)
@@ -27,7 +27,7 @@ export const getAirPollution = async (lat: number, lon: number) => {
 }
 export const getDailyForecast = async (lat: number, lon: number) => {
     try {
-        const response = await fetch(`${BASEURL}/forecast?lat=${lat}&lon=${lon}&appid=4c2a682b3126163ba5db64902b2030f9`, {
+        const response = await fetch(`${BASEURL}/forecast?lat=${lat}&lon=${lon}&appid=${key}`, {
             next: { revalidate: 3600 }
         })
 
