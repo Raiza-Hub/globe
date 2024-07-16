@@ -4,17 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCountries } from "@/hooks/use-countries";
 import { useRegion } from "@/hooks/use-region";
-import { searchBarSchema } from "@/schema/search-bar";
 import { Country } from "@/types/countries";
 import { MagnifyingGlass } from "@phosphor-icons/react";
-import { useForm } from "react-hook-form";
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Countries from "@/components/country/Countries";
 import CountrySkeleton from "@/components/country/country-skeleton";
-
+import NotFound from "@/components/NotFound";
 
 const SORT_OPTIONS = [
     { name: "All", value: "all", image: "/asia.png" },
@@ -26,77 +21,30 @@ const SORT_OPTIONS = [
     { name: "North America", value: "north America", image: "/asia.png" },
     { name: "South America", value: "south America", image: "/asia.png" },
     { name: "Central America", value: "central America", image: "/asia.png" },
-] as const
-
-
-interface FilterState {
-    sort: string
-    filteredCountries: Country[] | undefined
-    continent: Country[] | undefined
-}
-
+] as const;
 
 const Page = () => {
-    const [searchText, setSearchText] = useState<string>("all");
 
-    const [filter, setFilter] = useState<FilterState>({
-        sort: 'all',
-        filteredCountries: undefined,
-        continent: []
-    });
+    const [searchText, setSearchText] = useState<string>("");
+    const [filter, setFilter] = useState<string>('all');
 
-    const { data: countries, isError, isLoading } = useCountries();
+    const { data: countries, isError: errCountries, isLoading: loadCountries } = useCountries();
 
-    const { data: continent } = useRegion(filter.sort);
+    const { data: continents, isError: errContinents, isLoading: loadContinets } = useRegion(filter);
 
-    const router = useRouter()
+    const filteredCountry = countries?.filter((country: Country) =>
+        country.name.common.toLowerCase().includes(searchText.toLowerCase())
+    );
 
-    useEffect(() => {
-        if (countries) {
-            setFilter(prevState => ({
-                ...prevState,
-                filteredCountries: countries,
-                continent
-            }));
-        }
-    }, [countries, continent]);
+    const filteredRegion = continents?.filter((country: Country) =>
+        country.name.common.toLowerCase().includes(searchText.toLowerCase())
+    );
 
-
-    const { register, handleSubmit, getValues } = useForm<z.infer<typeof searchBarSchema>>({
-        resolver: zodResolver(searchBarSchema),
-        defaultValues: {
-            name: "",
-        },
-    });
-
-    const handleInputChange = () => {
-        const value = getValues('name');
-        router.push(`/countries/?sort=${filter.sort}&search=${value}`);
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setSearchText(e.target.value);
     };
 
-    const onSubmit = (values: z.infer<typeof searchBarSchema>) => {
-
-        const filteredCountries = countries?.filter((country: Country) =>
-            country.name.common.toLowerCase().includes(values.name.toLowerCase())
-        )
-
-        const filteredRegion = continent?.filter((country: Country) =>
-            country.name.common.toLowerCase().includes(values.name.toLowerCase())
-        )
-
-
-        setFilter(prev => ({
-            ...prev,
-            filteredCountries,
-            continent: filteredRegion
-        }));
-
-    };
-
-    const paginatedCountries =
-    filter.sort !== 'all' ?
-        filter?.continent :
-        filter?.filteredCountries
+    const paginatedCountries = filter !== 'all' ? filteredRegion : filteredCountry;
 
     return (
         <div className="w-full flex flex-col items-center px-4 lg:px-6 mt-8 lg:mt-12">
@@ -109,16 +57,10 @@ const Page = () => {
                         <Button
                             variant="ghost"
                             onClick={() => {
-
-                                router.push(`/countries/?sort=${option.value}`);
-
-                                setFilter(prev => ({
-                                    ...prev,
-                                    sort: option.value,
-                                }));
+                                setFilter(option.value);
                             }}
                         >
-                            <p className='text-sm text-gray-700 group-hover:text-gray-900 font-medium'>
+                            <p className='text-sm text-gray-700 group-hover:text-gray-900 dark:text-white dark:group-hover:text-white  font-medium'>
                                 {option.name}
                             </p>
                         </Button>
@@ -127,32 +69,30 @@ const Page = () => {
             </div>
             {/* {TODO: Mobile filter} */}
 
-            <div className="w-full lg:max-w-2xl flex flex-col  mx-auto mt-10 lg:mt-16 space-y-3">
-                <div className="flex items-center justify-center ring-1 ring-gray-400 focus-within:ring-gray-500 rounded-md disabled:opacity-30">
-                    <MagnifyingGlass className='size-5 ml-4 text-gray-700 group-hover:text-gray-900' />
+            <div className="w-full lg:max-w-2xl flex flex-col mx-auto mt-10 lg:mt-16 space-y-3">
+                <div className="flex items-center justify-center ring-1 ring-gray-400 focus-within:ring-gray-500 rounded-md">
+                    <MagnifyingGlass className='size-5 ml-4 text-gray-700 group-hover:text-gray-900 dark:text-white dark:group-hover:text-white' />
                     <Input
-                        {...register('name')}
-                        className='border-0'
-                        onKeyDown={(e) => {
-                            if (e.key === "Enter") {
-                                handleSubmit(onSubmit)()
-                                handleInputChange()
-                            }
-                        }}
-                        placeholder="Search 250 countries..."
+                        value={searchText}
+                        onChange={onChange}
+                        className='border-0 dark:text-white dark:placeholder:text-white'
+                        placeholder={filter != 'all' ? (
+                            `Search ${continents?.length} countries...`
+                        ) : (
+                            `Search 250 countries...`
+                        )}
                         autoComplete="off"
                     />
                 </div>
-                <p className='flex justify-center text-muted-foreground'>What&apos;s your favourite country?</p>
+                <p className='flex justify-center text-muted-foreground dark:text-white'>What&apos;s your favourite 💖 country?</p>
             </div>
 
-
-            <section className="w-full lg:container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20 gap-4">
-                {isLoading ? (
+            <section className="w-full lg:container mt-20  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {(loadCountries || loadContinets) ? (
                     new Array(9)
                         .fill(null)
                         .map((_, i) => <CountrySkeleton key={i} />)
-                ) : isError ? (
+                ) : (errCountries || errContinents) ? (
                     <div className="flex items-center">
                         <span className="relative flex h-2 w-2 mr-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
@@ -160,10 +100,14 @@ const Page = () => {
                         </span>
                         <p className="flex text-sm font-medium text-gray-900">Something went wrong</p>
                     </div>
-                ) : (
-                    paginatedCountries?.map((country, i) => (
+                ) : (paginatedCountries && paginatedCountries.length > 0) ? (
+                    paginatedCountries?.map((country: Country, i: number) => (
                         <Countries key={i} country={country} />
                     ))
+                ) : (
+                    <div className='-mt-12 mb-20 col-span-3'>
+                        <NotFound searchTerm={searchText} />
+                    </div>
                 )}
             </section>
 
