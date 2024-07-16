@@ -1,10 +1,9 @@
 import Link from "next/link";
-// import MaxWidthWrapper from "./MaxWidthWrapper";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/button";
 import { GithubLogo } from "@phosphor-icons/react/dist/ssr"
-// import { ModeToggle } from "./mode-toggle";
+import { ModeToggle } from "./mode-toggle";
 
 
 const Navbar = () => {
@@ -64,7 +63,7 @@ const Navbar = () => {
                                 <span className="sr-only">GitHub</span>
                             </div>
                         </Link>
-                        {/* <ModeToggle /> */}
+                        <ModeToggle />
                     </div>
                 </div>
             </nav>
