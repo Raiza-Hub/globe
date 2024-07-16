@@ -2,10 +2,18 @@
 
 import { kelvinToCelsius } from "@/lib/misc";
 import { WeatherData } from "@/types/weather";
-import { clearSky, cloudy, drizzleIcon, navigation, rain, snow } from "../Icons";
+import {
+    clearSky,
+    cloudy,
+    drizzleIcon,
+    navigation,
+    rain,
+    snow,
+    thunderStormIcon,
+    HazeIcon
+} from "../Icons";
 import { useEffect, useState } from "react";
 import moment from 'moment'
-import { CloudLightning, CloudFog } from "lucide-react";
 
 interface temperatureProps {
     temp: WeatherData
@@ -39,9 +47,9 @@ const Temperature = ({ temp }: temperatureProps) => {
             case 'Clouds':
                 return cloudy;
             case 'Thunderstorm':
-                return CloudLightning;
-            case 'Atmosphere':
-                return CloudFog;
+                return thunderStormIcon;
+            case 'Mist':
+                return HazeIcon;
             default:
                 return clearSky
         }
