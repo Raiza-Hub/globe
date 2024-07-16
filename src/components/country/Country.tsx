@@ -61,7 +61,7 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
 
 
     return (
-        <div className="bg-white">
+        <>
             <div className="mt-4">
                 {country?.map(main => (
                     <div key={main.cca2} className="flex items-center">
@@ -73,16 +73,16 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
                             height={100}
                             quality={100}
                         />
-                        <h1 className="text-2xl font-bold tracking-tight text-balance text-gray-900 sm:text-4xl">{main.name.official}</h1>
+                        <h1 className="text-2xl font-bold tracking-tight text-balance sm:text-4xl text-gray-900 dark:text-white">{main.name.official}</h1>
                     </div>
                 ))}
             </div>
 
             <section className="mt-4">
                 {country?.map(main => (
-                    <div key={main.cca2} className="flex flex-col ">
+                    <div key={main.cca2} className="flex flex-col">
                         <div className="flex">
-                            <p className='font-medium text-gray-900'>
+                            <p className='font-medium text-gray-900 dark:text-white'>
                                 {main.region}
                             </p>
 
@@ -96,7 +96,7 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
                                 aria-hidden="true"
                                 className="size-5 flex-shrink-0 text-green-500"
                             />
-                            <p className="ml-2 text-sm text-muted-foreground">
+                            <p className="ml-2 text-sm text-muted-foreground dark:text-white">
                                 {main.status}
                             </p>
                         </div>
@@ -110,12 +110,12 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
                     <div key={main.cca2} className="w-full flex justify-end gap-4">
                         <div className="flex py-2">
                             <DropdownMenu>
-                                <DropdownMenuTrigger className="flex justify-center font-medium text-gray-700 hover:bg-gray-50 border px-4 py-1 rounded-sm">
+                                <DropdownMenuTrigger className="flex justify-center font-medium text-gray-700 dark:text-white hover:bg-gray-50 dark:hover:text-gray-900 border px-4 py-1 rounded-sm">
                                     Timezone
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end">
                                     {main.timezones.map((time, i) => (
-                                        <div className="text-left w-full  px-4 py-2 text-sm text-muted-foreground" key={i}>
+                                        <div className="text-left w-full  px-4 py-2 text-sm text-muted-foreground dark:text-white" key={i}>
                                             {time}
                                         </div>
                                     ))}
@@ -126,11 +126,11 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
 
                         <div className="flex py-2">
                             <DropdownMenu>
-                                <DropdownMenuTrigger className="flex justify-center font-medium text-gray-700 hover:bg-gray-50 border px-4 py-1 rounded-sm">
+                                <DropdownMenuTrigger className="flex justify-center font-medium text-gray-700 dark:text-white hover:bg-gray-50 dark:hover:text-gray-900 border px-4 py-1 rounded-sm">
                                     Language
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end">
-                                    <div className="text-left w-full block px-4 py-2 text-sm text-muted-foreground">
+                                    <div className="text-left w-full block px-4 py-2 text-sm text-muted-foreground dark:text-white">
                                         {renderLanguages(main.languages)}
                                     </div>
                                 </DropdownMenuContent>
@@ -147,15 +147,15 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
                         <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
                             <div className="flex flex-col border rounded-sm py-2 space-y-1">
                                 <div className="flex items-center">
-                                    <UsersThree className='size-5 ml-2 mr-1 text-gray-500' />
-                                    <p className="font-medium text-gray-900">Population:</p>
+                                    <UsersThree className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' />
+                                    <p className="font-medium text-gray-900 dark:text-white">Population:</p>
                                 </div>
                                 <p className="text-center">{main.population.toLocaleString()}</p>
                             </div>
                             <div className="flex flex-col border rounded-sm py-2 space-y-1">
                                 <div className="flex items-center">
-                                    <Compass className='size-5 ml-2 mr-1 text-gray-500' />
-                                    <p className="font-medium text-gray-900">Area:</p>
+                                    <Compass className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' />
+                                    <p className="font-medium text-gray-900 dark:text-white">Area:</p>
                                 </div>
                                 <p className="text-center">
                                     {main.area.toLocaleString()}{" "}km
@@ -165,8 +165,8 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
                         </div>
                         <div className="flex flex-col border rounded-sm py-2 space-y-1">
                             <div className="flex items-center">
-                                <CastleTurret className='size-5 ml-2 mr-1 text-gray-500' />
-                                <p className="font-medium text-gray-900">Capital:</p>
+                                <CastleTurret className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' />
+                                <p className="font-medium text-gray-900 dark:text-white">Capital:</p>
                             </div>
 
                             <div className="flex justify-center gap-x-4">
@@ -182,8 +182,8 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
 
                         <div className="flex flex-col border rounded-sm py-2 space-y-1">
                             <div className="flex items-center">
-                                <Flag className='size-5 ml-2 mr-1 text-gray-500' />
-                                <p className="font-medium text-gray-900">Coat Of Arms:</p>
+                                <Flag className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' />
+                                <p className="font-medium text-gray-900 dark:text-white">Coat Of Arms:</p>
                             </div>
 
                             <div className="h-full flex justify-center items-center">
@@ -205,8 +205,8 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
                         <div className="flex items-center">
                             <div className="flex flex-col grow border rounded-sm py-2 space-y-1">
                                 <div className="flex items-center">
-                                    <Barricade className='size-5 ml-2 mr-1 text-gray-500' />
-                                    <p className="font-medium text-gray-900">Border:</p>
+                                    <Barricade className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' />
+                                    <p className="font-medium text-gray-900 dark:text-white">Border:</p>
                                 </div>
                                 <div className="text-center">{getFullCountryNames(main.borders) ?? 'None'}</div>
                             </div>
@@ -215,16 +215,16 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="flex flex-col border rounded-sm py-2 space-y-1">
                                 <div className="flex items-center">
-                                    <Planet className='size-5 ml-2 mr-1 text-gray-500' />
-                                    <p className="font-medium text-gray-900">Top-level domain:</p>
+                                    <Planet className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' />
+                                    <p className="font-medium text-gray-900 dark:text-white">Top-level domain:</p>
                                 </div>
-                                <p className="text-center ">{main.tld}</p>
+                                <p className="text-center">{main.tld}</p>
                             </div>
 
                             <div className="flex flex-col justify-center border rounded-sm py-2 space-y-1">
                                 <div className="flex items-center">
-                                    <CalendarDots className='size-5 ml-2 mr-1 text-gray-500' />
-                                    <p className="font-medium text-gray-900">Start Of Week:</p>
+                                    <CalendarDots className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' />
+                                    <p className="font-medium text-gray-900 dark:text-white">Start Of Week:</p>
                                 </div>
 
                                 <p className="text-center">{main.startOfWeek}</p>
@@ -234,7 +234,7 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
                     </div>
                 ))}
             </div>
-        </div>
+        </>
     );
 }
 

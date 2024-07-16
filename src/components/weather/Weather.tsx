@@ -27,7 +27,7 @@ const Weather = async ({ countriesId }: countryInfoProps) => {
 
     const latlonArray: number[] = [];
 
-    const coords = country.forEach(country => {
+    const coords = country?.forEach(country => {
         country.capitalInfo.latlng.forEach(coords => {
             latlonArray.push(coords);
         });

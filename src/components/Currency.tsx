@@ -28,22 +28,22 @@ const Currency = async ({ currencies }: currencyProps) => {
                 ))}
             </div>
         );
-    }
+    };
 
     function findCurrencyInfo(currencyCode: string, currencySymbol: string[], exchangeData: ExchangeData | undefined) {
-        const conversion_rates = exchangeData?.conversion_rates
+        const conversion_rates = exchangeData?.conversion_rates;
 
         if (!conversion_rates || !conversion_rates[currencyCode]) {
             return { jsx: <p>No currency found for code {currencyCode}</p>, currencyRate: 0 }
-        }
+        };
 
         const currencyRate = Number(conversion_rates[currencyCode]);
 
 
         return {
-            jsx: <div>1 USD = {currencySymbol} {currencyRate} </div>,
+            jsx: <div>1 USD = {currencySymbol?.[0]} {currencyRate} </div>,
             currencyRate: currencyRate
-        }
+        };
     };
 
     function extractCurrencyCode(currencies: Currencies) {
@@ -76,8 +76,8 @@ const Currency = async ({ currencies }: currencyProps) => {
             <div className="flex flex-col grow border rounded-sm py-2 space-y-1">
                 <div className="flex justify-between">
                     <div className="flex items-center">
-                        <Coins className='size-5 ml-2 mr-1 text-gray-500' />
-                        <p className="font-medium text-gray-900">Rates:</p>
+                        <Coins className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' />
+                        <p className="font-medium text-gray-900 dark:text-white">Rates:</p>
                     </div>
                     {signal < 1000 && signal !== 0 ? (
                         <span className="relative flex h-2 w-2 mr-2">
@@ -96,14 +96,14 @@ const Currency = async ({ currencies }: currencyProps) => {
                         </span>)
                         : null}
                 </div>
-                <div className="text-center text-muted-foreground text-gray-700">{currencyInfo}</div>
+                <div className="text-center">{currencyInfo}</div>
             </div>
-            <div className="flex flex-col grow  border rounded-sm py-2 space-y-1">
+            <div className="flex flex-col grow border rounded-sm py-2 space-y-1">
                 <div className="flex items-center">
-                    <Money className='size-5 ml-2 mr-1 text-gray-500' />
-                    <p className="font-medium text-gray-900">Currency:</p>
+                    <Money className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' />
+                    <p className="font-medium text-gray-900 dark:text-white">Currency:</p>
                 </div>
-                <div className="text-center text-muted-foreground text-gray-700">{renderCurrencies(currencies) ?? ''}</div>
+                <div className="text-center">{renderCurrencies(currencies)}</div>
             </div>
         </div>
     );
