@@ -21,7 +21,7 @@ import {
 
 export const drizzleIcon = <CloudDrizzle size={25} />;
 export const thunderStormIcon = <CloudLightning size={25} />;
-export const HazeIcon = <CloudFog size={25} />;
+export const HazeIcon = <CloudFog size={30} />;
 export const rain = <CloudRain size={30} />;
 export const snow = <Snowflake size={30} />;
 export const clearSky = <CloudSun size={30} />;
