@@ -7,6 +7,9 @@ import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/theme-provider"
 import  SiteFooter  from "@/components/site-footer";
 import { siteConfig } from "@/components/site-config";
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from "@/components/analytics";
+
 
 const source_san_3 = Source_Sans_3({
   subsets: ["latin"],
@@ -89,6 +92,8 @@ export default function RootLayout({
             </div>
           </Providers>
           <SiteFooter />
+          <SpeedInsights />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
