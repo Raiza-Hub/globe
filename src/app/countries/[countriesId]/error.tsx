@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Button, buttonVariants } from "@/components/ui/button"
-import Image from "next/Image"
+import Image from "next/image"
 import Link from "next/link";
 
 export default function ErrorBoundary({ error }: { error: Error }) {
