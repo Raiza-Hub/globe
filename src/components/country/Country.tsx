@@ -5,6 +5,7 @@ import {
     CastleTurret,
     Compass,
     Flag,
+    MapPinArea,
     Planet,
     SealCheck,
     UsersThree,
@@ -165,7 +166,8 @@ const CountryInfo = async ({ countriesId }: countryInfoProps) => {
                         </div>
                         <div className="flex flex-col border rounded-sm py-2 space-y-1">
                             <div className="flex items-center">
-                                <CastleTurret className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' />
+                                {/* <CastleTurret className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' /> */}
+                                <MapPinArea  className='size-5 ml-2 mr-1 text-gray-500 dark:text-white' />
                                 <p className="font-medium text-gray-900 dark:text-white">Capital:</p>
                             </div>
 
