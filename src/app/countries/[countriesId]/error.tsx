@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import Image from "next/Image"
 import Link from "next/link";
 
@@ -39,21 +39,24 @@ export default function ErrorBoundary({ error }: { error: Error }) {
             </div>
             {isOffline ? (
                 <Button
-                variant='link'
-                className='pt-2 font-medium text-gray-700 dark:text-white text-lg'
-                onClick={() => {
-                    window.location.reload();
-                }}
-            >
-                try again
-            </Button>
+                    variant='link'
+                    className='pt-2 font-medium text-gray-700 dark:text-white text-lg'
+                    onClick={() => {
+                        window.location.reload();
+                    }}
+                >
+                    try again
+                </Button>
             ) : (
                 <Link
-                href='/'
-                className='pt-2 font-medium text-gray-700 dark:text-white hover:underline'
-            >
-                Back to homepage
-            </Link>
+                    href='/'
+                    className={buttonVariants({
+                        variant: 'link',
+                        className: 'pt-2 font-medium text-gray-700 dark:text-white text-lg'
+                    })}
+                >
+                    Back to homepage
+                </Link>
             )}
         </div>
     )
