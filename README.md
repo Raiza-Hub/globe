@@ -5,7 +5,7 @@ Built with the Next.js 14 App Router, TypeScript, Shadcn/UI & Tailwind
 
 ## Features
 
-# 💻 Beautiful Landing Page
+💻 Beautiful Landing Page
 🔄 Streaming API Responses in Real-Time
 ✨ Instant Loading States
 🎨 Clean, Modern UI Using 'shadcn-ui'
