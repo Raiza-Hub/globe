@@ -6,7 +6,9 @@ const currencyKey = process.env.EXCHANGE_RATE_API_KEY;
 
 export const allCountries = async () => {
     try {
-        const res = await axios.get(`${BASEURL}/all`)
+        const res = await axios.get("https://restcountries.com/v3.1/all?fields=name,capital,currencies,flag,population")
+      
+        
         return res.data;
     } catch (error) {
         console.error('Error fetching data:', error)
@@ -30,7 +32,8 @@ export const getRegion = async (sort: string) => {
 
 export const getCountry = async (countryId: string) => {
     try {
-        const res = await axios.get(`${BASEURL}/name/${countryId}?fullText=true`)
+        const res = await axios.get(`https://restcountries.com/v3.1/name/${countryId}?fullText=true`)
+          
         return res.data;
     } catch (error) {
         console.error('Error fetching data:', error)

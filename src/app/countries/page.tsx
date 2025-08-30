@@ -39,6 +39,9 @@ const Page = () => {
     const { data: countries, isError: errCountries, isLoading: loadCountries } = useCountries();
     const { data: continents, isError: errContinents, isLoading: loadContinets } = useRegion(filter);
 
+    console.log(countries);
+    
+
     const filteredCountry = countries?.filter((country: Country) =>
         country.name.common.toLowerCase().includes(searchText.toLowerCase())
     );

@@ -44,14 +44,9 @@ const Countries = ({ country }: { country: Country }) => {
                         </h2>
                     </Link>
 
-                    <Image
-                        src={country.flags.svg}
-                        alt={country.flags.alt ?? country.name.official}
-                        className="w-16 h-8 mr-4 object-cover object-center group-hover:opacity-75"
-                        width={64}
-                        height={32}
-                        quality={100}
-                    />
+                    <div className="w-16 h-8 object-cover object-center group-hover:opacity-75">
+                        {country.flag && <p className="text-center text-4xl">{country.flag}</p>}
+                    </div>
 
                 </div>
 
